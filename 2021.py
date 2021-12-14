@@ -516,7 +516,18 @@ def day14(file):
     vals = occurence.values()
     print('Most common element minus least common element: %d' % (max(vals) - min(vals)))
 
-#14.txt
-#input/14.txt
+
 day = sys.argv[1].lstrip('input/').split('.')[0].rstrip('ex')
-locals()["day" + day](sys.argv[1])
+if len(sys.argv) > 2:
+    import time
+    t = []
+    for i in range(50):
+        t0 = time.time()
+        locals()["day" + day](sys.argv[1])
+        t.append(time.time() - t0)
+    print('Day: %s' % day)
+    print('Minimum of 50 runs: %.12f s.' % min(t))
+    print('Average of 50 runs: %.12f s.' % np.mean(t))
+else:
+    locals()["day" + day](sys.argv[1])
+
